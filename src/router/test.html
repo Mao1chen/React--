@@ -1,0 +1,35 @@
+<script>
+  let startTime;
+
+  function getMouseMovement() {
+    const pos = window.MouseEvent;
+    console.log(pos);
+    return pos;
+  }
+
+  function getTimeDifference() {
+    const currentTime = new Date().getTime();
+    return currentTime - startTime;
+  }
+
+  function calculateSpeed(distance, time) {
+    return distance / time;
+  }
+
+  function update() {
+    const mouseMovement = getMouseMovement();
+    console.log(mouseMovement);
+    const distance = Math.sqrt(mouseMovement.x ** 2 + mouseMovement.y ** 2);
+    const timeDifference = getTimeDifference();
+
+    if (timeDifference > 0) {
+      const speed = calculateSpeed(distance, timeDifference);
+      console.log(`Mouse speed: ${speed} pixels/second`);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  startTime = new Date().getTime();
+  requestAnimationFrame(update);
+</script>

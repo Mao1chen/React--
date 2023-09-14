@@ -1,0 +1,49 @@
+#app {
+  color: @primaryColor;
+}
+#root {
+  height: 100%;
+  min-height: 100%;
+}
+.adm-swiper-horizontal .adm-swiper-indicator {
+  bottom: 30px !important;
+  left: auto !important;
+  right: 0;
+  .adm-page-indicator-dot {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    &.adm-page-indicator-dot-active {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 40px !important;
+    }
+  }
+  .adm-page-indicator-dot {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+}
+.adm-image-tip {
+  height: 750px !important;
+  & > svg {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+.adm-skeleton-title {
+  height: 50px !important;
+}
+.adm-skeleton-paragraph {
+  .adm-skeleton-paragraph-line {
+    height: 30px !important;
+  }
+}
+.adm-divider-left.adm-divider-horizontal::before {
+  max-width: 3% !important;
+}
+.adm-divider-content {
+  font-size: 32px !important;
+}
+.adm-nav-bar {
+  height: 80px !important;
+}

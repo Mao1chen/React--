@@ -1,0 +1,49 @@
+a:visited {
+  & .lt_title {
+    color: #999;
+  }
+}
+.journalism_lt {
+  position: relative;
+  height: 130px;
+  padding: 30px 0;
+  margin-bottom: 20px;
+  .lt_title {
+    display: -webkit-box;
+    width: 80%;
+    color: #333;
+    font-size: 32px;
+    line-height: 42px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+  }
+  .ht_cot {
+    color: #a8a7a7;
+    display: block;
+    padding: 16px 0 0;
+    font-size: 26px;
+  }
+  .adm-image {
+    .adm-image-tip {
+      position: absolute;
+      right: 0;
+      top: 20px;
+      width: 140px;
+      height: 140px !important;
+      & > svg {
+        height: 60px !important;
+        width: 60px !important;
+      }
+    }
+  }
+  img {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    height: 140px;
+    width: 140px;
+    border-radius: 10px;
+  }
+}

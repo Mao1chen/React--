@@ -1,0 +1,73 @@
+.information-cot {
+  .content {
+    min-height: calc(100vh - 90px);
+    padding-bottom: 90px;
+    margin: 0;
+    .img-place-holder {
+      position: relative;
+      height: inherit;
+      overflow: hidden;
+      .span-placeholder {
+        color: #fff;
+        position: absolute;
+        left: 0;
+        bottom: 30px;
+        padding: 0 20px;
+        font-weight: 700;
+      }
+      img {
+        display: inline-block;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    img {
+      display: inline-block;
+      margin: 0;
+    }
+    .author {
+      margin-left: 10px;
+    }
+  }
+  .app-cot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 0 20px;
+    background-color: #f6f6f6;
+    .back-cot {
+      width: 80px;
+      border-right: 1px solid #dadada;
+      .icon {
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .more-cot {
+      flex: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px;
+      .adm-badge-fixed {
+        right: -30%;
+      }
+      .adm-badge {
+        --color: transparent;
+        .adm-badge-content {
+          color: #333;
+          font-size: 30px !important;
+          background-color: transparent;
+        }
+      }
+      .icon {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+}
