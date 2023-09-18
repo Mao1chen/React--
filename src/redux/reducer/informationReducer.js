@@ -3,7 +3,7 @@ import { $localSave } from "@/utils";
 const informationReducer = (
   initial = {
     userInfo: null,
-    token: $localSave.gain("authorization"),
+    authorization: $localSave.gain("authorization"),
   },
   { type, payload }
 ) => {
@@ -13,7 +13,7 @@ const informationReducer = (
       deepReource.userInfo = payload;
       break;
     case actionTypes.SAVE_TOKEN:
-      deepReource.token = payload;
+      deepReource.authorization = payload;
     default:
       break;
   }

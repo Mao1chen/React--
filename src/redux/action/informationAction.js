@@ -7,12 +7,11 @@ const initialInformationAction = {
       payload,
     };
   },
-  initialUserInformation: async authorization => {
+  initialUserInformation: async () => {
     let payload = null;
     try {
-      const { data } = await $http.get("/user_info");
+      const { data = null } = await $http.get("/user_info");
       payload = data;
-      this.saveToken(authorization);
     } catch (exception) {
       throw exception;
     }

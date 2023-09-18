@@ -7,19 +7,21 @@ import { validateMessages, useCommonValidator, constant, useToast, $localSave } 
 import { Form, Input, Button } from "antd-mobile";
 import RecombinationNavBar from "@/component/RecombinationNavBar";
 let timer = null;
-const Login = ({ initialUserInformation, navigate, params }) => {
+const Login = ({ initialUserInformation, navigate, params, saveToken }) => {
   const [formInstance] = Form.useForm();
   const [authCodeStatue, setAuthCodeStatus] = React.useState(false),
     [buttonMessage, setButtonMessage] = React.useState("获取验证码");
+
   const clickLoginHooks = async ({ phone, code }) => {
       try {
         useToast.loading("登录中...");
         const { token } = await $http.get(`/login?phone=${phone}&code=${code}`);
         $localSave.save("authorization", token);
         await initialUserInformation(token);
+        saveToken(token);
         useToast.success("登录成功");
-        let redirect = params.get("redirect");
-        navigate(redirect ? redirect : -1, { replace: true });
+        let redirect = params?.redirect;
+        navigate(redirect ? `/${redirect}` : "/", { replace: true });
       } catch (exception) {
         throw exception;
       }

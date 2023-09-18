@@ -1,24 +1,37 @@
-import React, { useEffect } from "react";
-import { $localSave, constant } from "@/utils";
-import { Toast } from "antd-mobile";
+import React from "react";
+import { connect } from "react-redux";
+import { initialInformationAction } from "@/redux/action";
+import { constant, useToast } from "@/utils";
 import { ExclamationOutline } from "antd-mobile-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Permission = ({ children }) => {
-  const authentication = $localSave.gain("authentication"),
-    path = useLocation().pathname,
+const Permission = ({ children, userInfo, authorization, initialUserInformation }) => {
+  const path = useLocation().pathname,
     navigate = useNavigate();
-  useEffect(() => {
-    if (authentication && path == "/login") {
-      Toast.show({ icon: <ExclamationOutline />, content: "您已经登陆" });
+
+  React.useEffect(() => {
+    if (authorization && path == "/login") {
+      useToast.useDefined("您已经登陆", ExclamationOutline);
       navigate("/");
     }
-    if (!authentication && constant.ROUTES_WHITE.includes(path)) {
-      Toast.show({ icon: "fail", content: "请先登陆" });
-      navigate("/login");
+
+    if (authorization && !userInfo) {
+      (async () => {
+        try {
+          await initialUserInformation();
+        } catch (exception) {
+          throw exception;
+        }
+      })();
     }
-  }, []);
+
+    if (!authorization && constant.ROUTES_WHITE.includes(path)) {
+      useToast.error("请先登陆");
+      navigate(`/login${path}`, { replace: true });
+    }
+  });
+
   return <>{children}</>;
 };
 
-export default Permission;
+export default connect(({ informationReducer }) => informationReducer, initialInformationAction)(Permission);

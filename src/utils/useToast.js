@@ -15,10 +15,7 @@ class useToast {
   useDefinedLoading(content, Icon) {
     Toast.show({ icon: <Icon />, content, duration: 0 });
   }
-  useDefinedSuccess(content, Icon, duration = 2000) {
-    Toast.show({ icon: <Icon />, content, duration });
-  }
-  useDefinedError(content, Icon, duration = 2000) {
+  useDefined(content, Icon, duration = 2000) {
     Toast.show({ icon: <Icon />, content, duration });
   }
   overallSituation() {

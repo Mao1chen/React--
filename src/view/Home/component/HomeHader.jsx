@@ -1,7 +1,10 @@
 import React, { useMemo } from "react";
 import style from "./HomeHeader.module.less";
 import { constant } from "@/utils";
-const HomeHader = React.memo(({ today }) => {
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+const HomeHader = React.memo(({ today, pic }) => {
+  const navigate = useNavigate();
   const message = useMemo(() => {
     return { month: constant.TRANSITIONUPPERCASEARRAYLIST[+today[1]], day: today[2] };
   }, [today]);
@@ -28,9 +31,9 @@ const HomeHader = React.memo(({ today }) => {
         </time>
         <span className={style.message}>{gainExtendGreetingsToHooks()}</span>
       </div>
-      <img src={require("@/assets/images/avatar.jpg")} alt='user picture' className={style.picture} />
+      <img onClick={() => navigate("/personal")} src={pic ? pic : require("@/assets/images/avatar.jpg")} alt='user picture' className={style.picture} />
     </header>
   );
 });
 
-export default HomeHader;
+export default connect(({ informationReducer }) => informationReducer.userInfo || {}, null)(HomeHader);
