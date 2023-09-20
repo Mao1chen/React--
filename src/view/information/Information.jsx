@@ -1,13 +1,16 @@
 import React from "react";
 import "./information.less";
 import { flushSync } from "react-dom";
+import { connect } from "react-redux";
+import * as reduxAction from "@/redux/action";
 import { SafeArea, Badge } from "antd-mobile";
 import $http from "@/http";
 import RecombinationSkeleton from "@/component/RecombinationSkeleton";
-const Information = ({ params, navigate }) => {
-  let id = params.id,
+const Information = ({ params, navigate, collectList, initialCollectListAsyncAction, removeCollectAsyncAction }) => {
+  const id = params.id,
     [hotInformation, setHotInformation] = React.useState({ popularity: 0, comments: 0 }),
     [viewInformation, setviewInformation] = React.useState(null);
+
   const headerElement = document.getElementsByTagName("head")[0];
   const linkElement = document.createElement("link");
   const initSettleHooksInformation = result => {
@@ -43,6 +46,15 @@ const Information = ({ params, navigate }) => {
       headerElement.removeChild(linkElement);
     };
   }, []);
+
+  React.useEffect(() => {
+    if (collectList === null) {
+      initialCollectListAsyncAction();
+    }
+  }, []);
+
+  const whetherCollect = React.useMemo(() => (collectList || []).some(next => next.news.id === id), [collectList, id]);
+
   return (
     <div className='information-cot'>
       {!viewInformation ? <RecombinationSkeleton onOff={false} line={50} /> : <main className='content' dangerouslySetInnerHTML={{ __html: viewInformation?.body }}></main>}
@@ -93,4 +105,4 @@ const Information = ({ params, navigate }) => {
   );
 };
 
-export default Information;
+export default connect(({ collectReducer: { collectList } }) => ({ collectList }), reduxAction.collectAction)(Information);

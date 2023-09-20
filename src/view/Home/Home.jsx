@@ -8,6 +8,7 @@ import { Swiper, Image, Toast, SpinLoading } from "antd-mobile";
 import BackTheTop from "@/component/BackTheTop";
 import RecombinationSkeleton from "@/component/RecombinationSkeleton";
 import InfinityLoading from "@/component/InfinityLoading";
+
 const Home = () => {
   const [today] = React.useState(new Date().toLocaleDateString().split("/")),
     [bannerInformation, setBannerInformation] = React.useState([]),

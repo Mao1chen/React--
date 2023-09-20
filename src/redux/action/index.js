@@ -1,3 +1,4 @@
 import initialInformationAction from "./informationAction";
+import collectAction from "./collectAction";
 
-export { initialInformationAction };
+export { initialInformationAction, collectAction };
