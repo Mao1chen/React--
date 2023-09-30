@@ -23,8 +23,8 @@ const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = process.env.TSC_COMPILE_ON_ERROR === "true" ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin") : require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const createEnvironmentHash = require("./webpack/persistentCache/createEnvironmentHash");
-// Source maps are resource heavy and can cause out of memory issue for large source files.
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
+// 打包的时候不生成map文件，map文件是调试文件，用于在浏览器js报错的时候显示源代码而不显示打包后的代码用的，用处不大
+const shouldUseSourceMap = false;
 
 const reactRefreshRuntimeEntry = require.resolve("react-refresh/runtime");
 const reactRefreshWebpackPluginRuntimeEntry = require.resolve("@pmmmwh/react-refresh-webpack-plugin");
