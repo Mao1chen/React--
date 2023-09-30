@@ -132,6 +132,13 @@ module.exports = function (webpackEnv) {
                   "postcss-normalize",
                   px2rem({
                     rootValue: 75, // 基于lib-flexble，750设计稿
+                    // rootValue({ file }) {
+                    //   return file.indexOf("antd-mobile") !== -1 ? 37.5 : 75;
+                    //   // 10倍 ， 37.5是ant组件设计稿，75是设计师尺寸
+                    //   /* 这里用到这个判断的式子的原因是 如果我们用到设计稿与我们用的组件设计稿不一致的时候，就用这个式子
+                    // 进行判断，因为用的是 antd-mobile组件所以判断是否用到这个组件
+                    // */
+                    // },
                     propList: ["*"], // 对所有文件生效
                   }),
                 ]
@@ -150,6 +157,13 @@ module.exports = function (webpackEnv) {
                   px2rem({
                     rootValue: 75, // 基于lib-flexble，750设计稿
                     propList: ["*"], // 对所有文件生效
+                    // rootValue({ file }) {
+                    //   return file.indexOf("antd-mobile") !== -1 ? 37.5 : 75;
+                    //   // 10倍 ， 37.5是ant组件设计稿，75是设计师尺寸
+                    //   /* 这里用到这个判断的式子的原因是 如果我们用到设计稿与我们用的组件设计稿不一致的时候，就用这个式子
+                    // 进行判断，因为用的是 antd-mobile组件所以判断是否用到这个组件
+                    //         */
+                    // },
                   }),
                 ],
           },

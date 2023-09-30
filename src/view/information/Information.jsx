@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 import * as reduxAction from "@/redux/action";
 import { SafeArea, Badge } from "antd-mobile";
 import $http from "@/http";
+import { $localSave, useToast } from "@/utils";
 import RecombinationSkeleton from "@/component/RecombinationSkeleton";
-const Information = ({ params, navigate, collectList, initialCollectListAsyncAction, removeCollectAsyncAction }) => {
+
+const Information = ({ params, navigate, location, collectList, initialCollectListAsyncAction, removeCollectAsyncAction }) => {
   const id = params.id,
     [hotInformation, setHotInformation] = React.useState({ popularity: 0, comments: 0 }),
     [viewInformation, setviewInformation] = React.useState(null);
@@ -29,6 +31,27 @@ const Information = ({ params, navigate, collectList, initialCollectListAsyncAct
     imgContainer.appendChild(imageElement);
     imgContainer.appendChild(spanNode);
   };
+
+  const clickHooksCollectOrClean = async () => {
+    try {
+      if (!!!$localSave.gain("authorization")) {
+        navigate(`/login/${location.pathname}`);
+        return;
+      }
+      if (whetherCollect) {
+        const { code } = await $http.get(`/store_remove?id=${id}`);
+        !code && useToast.success("移除成功");
+        removeCollectAsyncAction(id);
+        return;
+      }
+      const { code } = await $http.get(`/store?newsId=${id}`);
+      !code && useToast.success("收藏成功");
+      initialCollectListAsyncAction();
+    } catch (exception) {
+      throw exception;
+    }
+  };
+
   React.useEffect(() => {
     (async () => {
       try {
@@ -86,10 +109,10 @@ const Information = ({ params, navigate, collectList, initialCollectListAsyncAct
               ></path>
             </svg>
           </Badge>
-          <svg t='1694138688018' className='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='7131'>
+          <svg t='1694138688018' className='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='7131' onClick={() => clickHooksCollectOrClean()}>
             <path
               d='M335.008 916.629333c-35.914667 22.314667-82.88 10.773333-104.693333-25.557333a77.333333 77.333333 0 0 1-8.96-57.429333l46.485333-198.24a13.141333 13.141333 0 0 0-4.021333-12.864l-152.16-132.586667c-31.605333-27.52-35.253333-75.648-8.234667-107.733333a75.68 75.68 0 0 1 51.733333-26.752L354.848 339.2c4.352-0.362667 8.245333-3.232 10.026667-7.594667l76.938666-188.170666c16.032-39.2 60.618667-57.92 99.52-41.461334a76.309333 76.309333 0 0 1 40.832 41.461334l76.938667 188.16c1.781333 4.373333 5.674667 7.253333 10.026667 7.605333l199.712 16.277333c41.877333 3.413333 72.885333 40.458667 69.568 82.517334a76.938667 76.938667 0 0 1-26.08 51.978666l-152.16 132.586667c-3.541333 3.082667-5.141333 8.074667-4.021334 12.853333l46.485334 198.24c9.621333 41.013333-15.36 82.336-56.138667 92.224a75.285333 75.285333 0 0 1-57.525333-9.237333l-170.976-106.24a11.296 11.296 0 0 0-12.010667 0l-170.986667 106.24z'
-              fill='#000000'
+              fill={whetherCollect ? "#2ECCFA" : "#000000"}
               p-id='7132'
             ></path>
           </svg>

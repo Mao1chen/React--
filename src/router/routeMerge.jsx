@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import Home from "@/view/Home/Home";
+
 const routes = [
   {
     name: "home",

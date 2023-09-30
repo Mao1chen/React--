@@ -29,7 +29,8 @@ const Permission = ({ children, userInfo, authorization, initialUserInformation 
       useToast.error("请先登陆");
       navigate(`/login${path}`, { replace: true });
     }
-  });
+    document.documentElement.scrollTo(0, 0);
+  }, [path]);
 
   return <>{children}</>;
 };

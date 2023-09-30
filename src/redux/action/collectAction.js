@@ -12,14 +12,11 @@ const collectAction = {
     }
     return { type: ActionTypes.INITIAL_COLLECT, payload };
   },
-  async removeCollectAsyncAction(id) {
-    let payload;
-    try {
-      payload = await $http.get(`/store_remove?id=${id}`);
-    } catch (exception) {
-      throw exception;
-    }
+  removeCollectAsyncAction(payload) {
     return { type: ActionTypes.REMOVE_COLLECT, payload };
+  },
+  cleanCollectSyncAction() {
+    return { type: ActionTypes.INITIAL_COLLECT, payload: null };
   },
 };
 

@@ -5,6 +5,7 @@ const InfinityLoading = ({ altitude, onBottomOut, children, nomore }) => {
   if (children) {
     children = React.Children.toArray(children);
   }
+
   React.useEffect(() => {
     let obServer = new IntersectionObserver(alter => {
       let { isIntersecting } = alter[0];

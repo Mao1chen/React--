@@ -11,7 +11,7 @@ const collectReducer = (
       cloneState.collectList = payload;
       break;
     case ActionTypes.REMOVE_COLLECT:
-      cloneState.collectList = cloneState.collectList.filter(next => +next.id != +payload);
+      cloneState.collectList = cloneState.collectList.filter(next => +next.news.id != +payload);
       break;
     default:
       break;

@@ -6,14 +6,14 @@ class $localStorage {
   // 支持批量存储
   save(key, value) {
     switch (typeof key) {
-      case 'string':
+      case "string":
         localStorage.setItem(key, JSON.stringify(value));
         break;
-      case 'object':
+      case "object":
         key.forEach((next, index) => localStorage.setItem(next, JSON.stringify(value[index])));
         break;
       default:
-        return Promise.reject('传入类型错误');
+        return Promise.reject("传入类型错误");
     }
   }
   gain(key) {

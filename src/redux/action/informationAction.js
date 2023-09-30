@@ -20,6 +20,9 @@ const initialInformationAction = {
       payload,
     };
   },
+  cleanUserInformation() {
+    return { type: actionType.CLEAN_USER };
+  },
 };
 
 export default initialInformationAction;

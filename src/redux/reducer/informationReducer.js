@@ -5,7 +5,7 @@ const informationReducer = (
     userInfo: null,
     authorization: $localSave.gain("authorization"),
   },
-  { type, payload }
+  { type, payload = null }
 ) => {
   const deepReource = JSON.parse(JSON.stringify(initial));
   switch (type) {
@@ -14,6 +14,11 @@ const informationReducer = (
       break;
     case actionTypes.SAVE_TOKEN:
       deepReource.authorization = payload;
+      break;
+    case actionTypes.CLEAN_USER:
+      deepReource.authorization = null;
+      deepReource.userInfo = null;
+      break;
     default:
       break;
   }
